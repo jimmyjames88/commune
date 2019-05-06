@@ -2,7 +2,7 @@
 
 @section('content')
 <h1 class="title">Edit Profile</h1>
-<form action="/profiles/{{ $profile->user_id }}" method="post">
+<form action="/profiles/{{ $profile->user_id }}" method="post" enctype="multipart/form-data">
     {{ method_field('put') }}
     @csrf
     <div class="form-group">
@@ -22,6 +22,20 @@
         <textarea name="bio" class="form-control">{{ $profile->bio }}</textarea>
     </div>
     <div class="form-group">
+        <label>Profile Photo</label>
+        <photo-upload
+            :name="'avatar'"
+            photo="{{ $profile->avatar ? '/images/avatars/' . $profile->user->id . '/' . $profile->avatar : ''}}">
+        </photo-upload>
+    </div>
+    <div class="form-group">
+        @if($errors->any())
+        <ul class="alert alert-danger">
+            @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+        @endif
         <button type="submit" class="btn btn-primary">Save</button>
     </div>
 </form>

@@ -18,14 +18,32 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/logout', 'Auth\LoginController@logout');
 
+Route::get('/tweets', function(){
+    $limit = $_GET['limit'];
+    $posts = \App\Post::with(['user'])->limit($limit)->get();
+    return $posts;
+})->middleware(['cors']);
+
+// Route::get('/tweets-api', function(){
+//     $tweets = \App\Tweet::with(['user'])->limit(20)->get();
+//     return $tweets;
+// })->middleware(['cors']);
+
+Route::get('marketing', function() {
+    return view('marketing.index');
+});
 
 Route::middleware(['auth'])->group(function() {
 
     Route::get('/home', function(){
         return redirect(route('home'));
     });
+
+
+
     Route::get('/posts', 'PostController@index')->name('home');
     Route::get('/posts/create', 'PostController@create');
+    Route::get('/posts/{post}/edit', 'PostController@edit');
     Route::post('/posts', 'PostController@store');
     Route::get('/likes/{like_id}/{like_type}', 'LikeController@handleLike');
     Route::get('/posts/{post}', 'PostController@show');
@@ -44,6 +62,7 @@ Route::middleware(['auth'])->group(function() {
     Route::resource('conversations', 'ConversationController');
     Route::post('/conversations/{conversation}/messages', 'MessageController@store');
     Route::put('/conversations/{conversation}/invite', 'ConversationController@invite');
+    Route::get('/conversations/create/{user}', 'ConversationController@create');
 
     Route::resource('/profiles', 'ProfileController');
 
@@ -62,4 +81,7 @@ Route::middleware(['auth'])->group(function() {
     // who to follow one-off -- if adding more standalone pages, consider a PageController
     Route::get('/who-to-follow', 'ProfileController@suggest');
 
+    Route::get('/pusher', function() {
+        return view('pusher.test');
+    });
 });

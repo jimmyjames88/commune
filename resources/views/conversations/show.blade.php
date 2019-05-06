@@ -2,9 +2,11 @@
 
 @section('content')
 <h3 class="title">Conversation {{ $conversation->id }}</h3>
+
 <h5 class="subtitle">
     {{ implode($conversation->users->pluck('name')->toArray(), ', ') }}
 </h5>
+@if($conversation->group_conversation)
 
 <a href="#inviteUser" data-toggle="modal" class="btn btn-primary">
     <i class="fa fa-plus-circle"></i> Add user
@@ -39,6 +41,7 @@
         </div>
     </div>
 </div>
+@endif
 
 <div class="message-wrapper mt-4">
     @foreach($conversation->messages as $message)

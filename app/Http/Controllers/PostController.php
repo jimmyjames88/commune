@@ -20,11 +20,13 @@ class PostController extends Controller
                         ->where('follower_id', Auth::id())
                         ->pluck('leader_id')
                         ->toArray();
+        array_push($following, Auth::id());
 
         // load posts of Users I follow
-        $posts = \App\Post::with(['user', 'comments', 'likes'])
+        $posts = \App\Post::with(['user', 'user.profile', 'comments', 'likes'])
                     ->whereIn('user_id', $following)
-                    ->paginate(20);
+                    ->latest()
+                    ->paginate(10);
 
         return view('posts.index', compact('posts'));
     }
@@ -50,17 +52,31 @@ class PostController extends Controller
     {
         /* if validations fails, the user will be
            sent back automatically (with errors) */
-        $data = $request->validate([
+        $request->validate([
             'body'  =>  'required|min:2|max:280',
+            'photo' =>  'image|mimes:png,jpg,jpeg,gif|max:2048'
         ]);
 
-        // set user_id (author) to authenticated user
-        $data['user_id'] = Auth::id();
-        $post = \App\Post::create($data);
+        // setup new post
+        $post = new \App\Post;
+        $post->user_id = Auth::id();
+        $post->body = $request->body;
 
+        if($request->photo){
+            // photo prep for upload
+            $image = $request->file('photo');
+            $new_name = uniqid() . '.' . $image->getClientOriginalExtension();
+            $post->photo = $new_name;
+        } else {
+            $post->photo = null;
+        }
 
-        // if successful, redirect to the post
-        if($post) {
+        // save, if successful redirect to the post
+        if($post->save()) {
+
+            // upload photo
+            if($post->photo) $image->move(public_path("images/posts/" . $post->id), $new_name);
+
             return redirect('/posts/' . $post->id);
         } else {
             return back()->withErrors([
@@ -79,7 +95,10 @@ class PostController extends Controller
     {
         $post = \App\Post::with(['comments', 'comments.user', 'comments.likes', 'likes'])->find($id);
 
-        return view('posts.show', compact('post'));
+        return view('posts.show', [
+            'post'  =>  $post,
+            'hideCommentPreview' => true
+        ]);
     }
 
     /**
@@ -90,7 +109,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = \App\Post::find($id);
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -108,8 +128,25 @@ class PostController extends Controller
         // change post body
         $post->body = $request->input('body');
 
+        print_r($request->photo);
+        
+        if($request->photo){
+            // photo prep for upload
+            $image = $request->file('photo');
+            $new_name = uniqid() . '.' . $image->getClientOriginalExtension();
+            $post->photo = $new_name;
+        }
+
+
+
         // save
-        $post->save();
+        if($post->save()) {
+
+            // upload photo
+            if($request->photo) $image->move(public_path("images/posts/" . $post->id), $new_name);
+            return redirect('/posts/' . $post->id);
+        }
+        dd('unspecified error');
     }
 
     public function delete($id)

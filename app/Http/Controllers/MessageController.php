@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use Notification;
+use App\Notifications\NewMessage;
 
 class MessageController extends Controller
 {
@@ -46,6 +48,14 @@ class MessageController extends Controller
         ]);
 
         if($message) {
+            // send notifications
+            $conversation = $message->conversation;
+
+            foreach($conversation->users as $user) {
+                $user->notify(new NewMessage($message));
+            }
+
+
             return redirect('/conversations/' . $conversation_id);
         }
 

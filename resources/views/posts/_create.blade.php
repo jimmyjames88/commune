@@ -3,7 +3,7 @@
         Write a Post
     </div>
     <div class="card-body">
-        <form action="/posts" method="POST">
+        <form action="/posts" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <textarea name="body" class="form-control" placeholder="What's on your mind?"></textarea>
@@ -16,38 +16,15 @@
                 </ul>
             @endif
             <div class="form-group row mb-0">
-                <div class="col-8">
-                    <a href="#post-emoji-list" data-toggle="collapse">
-                        <i class="fa fa-smile-o"></i> Emojis
+                <div class="col-6">
+                    <a href="#addPhotoPane" data-toggle="collapse">
+                        <i class="fa fa-camera"></i> Photo
                     </a>
-                    <div id="post-emoji-list" class="collapse emoji-list">
-                        <a href="#">&#x1F600</a>
-                        <a href="#">&#x1F603</a>
-                        <a href="#">&#x1F604</a>
-                        <a href="#">&#x1F601</a>
-                        <a href="#">&#x1F606</a>
-                        <a href="#">&#x1F605</a>
-                        <a href="#">&#x1F923</a>
-                        <a href="#">&#x1F602</a>
-                        <a href="#">&#x1F642</a>
-                        <a href="#">&#x1F60A</a>
-                        <a href="#">&#x1F607</a>
-                        <a href="#">&#x1F60D</a>
-                        <a href="#">&#x1F618</a>
-                        <a href="#">&#x1F61B</a>
-                        <a href="#">&#x1F61D</a>
-                        <a href="#">&#x1F92B</a>
-                        <a href="#">&#x1F914</a>
-                        <a href="#">&#x1F910</a>
-                        <a href="#">&#x1F610</a>
-                        <a href="#">&#x1F60F</a>
-                        <a href="#">&#x1F92E</a>
-                        <a href="#">&#x1F608</a>
-                        <a href="#">&#x1F480</a>
-                        <a href="#">&#x2764</a>
+                    <div id="addPhotoPane" class="collapse">
+                        <photo-upload :name="'photo'"></photo-upload>
                     </div>
                 </div>
-                <div class="col-4 text-right">
+                <div class="col-6 text-right">
                     <button type="submit" class="btn btn-primary">Publish</button>
                 </div>
             </div>

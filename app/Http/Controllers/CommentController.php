@@ -35,11 +35,25 @@ class CommentController extends Controller
      */
     public function store(Request $request, $id)
     {
-        $comment = \App\Comment::create([
-            'body'      =>  $request->body,
-            'user_id'   =>  Auth::id(),
-            'post_id'   =>  $id
+        $request->validate([
+            'body'  =>  'min:2|max:400',
+            'photo' =>  'image|mimes:jpg,jpeg,png,gif|max:2048'
         ]);
+
+        // Build data array for mass insertion
+        $data = $request->all();
+        $data['user_id'] = Auth::id();
+        $data['post_id'] = $id;
+
+        // photo upload
+        if($request->photo) {
+            $image = $request->file('photo');
+            $new_name = uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path("images/posts/" . $id . '/comments'), $new_name);
+            $data['photo'] = $new_name;
+        }
+
+        $comment = \App\Comment::create($data);
 
         if($comment) {
             $request->session()->flash('message', 'Your comment has been added');

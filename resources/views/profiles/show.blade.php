@@ -3,7 +3,11 @@
 @section('sidebar-left')
 <div class="card">
     <div class="card-body text-center">
-        <div class="img-thumbnail rounded" style="width:100%; padding-bottom: 82.5%;"></div>
+        @if($user->profile->avatar)
+        <div class="img-thumbnail rounded profile-photo" style="background-image:url('/images/avatars/{{ $user->id }}/{{ $user->profile->avatar }}')"></div>
+        @else
+        <div class="img-thumbnail rounded profile-photo" style="background-image:url('/images/avatars/default.png')"></div>
+        @endif
         <h3 class="card-title mt-2">{{ $user->name }}</h3>
         @if(Auth::id() == $user->id)
         <a href="/profiles/{{ $user->id }}/edit" class="btn btn-small btn-primary">

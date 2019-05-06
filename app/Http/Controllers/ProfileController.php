@@ -14,7 +14,7 @@ class ProfileController extends Controller
 
     public function show($id) {
         $user = \App\User::find($id);
-        $user->posts = $user->posts()->with(['likes', 'comments'])->latest()->get();
+        $user->posts = $user->posts()->with(['likes', 'comments', 'user.profile'])->latest()->get();
         return view('profiles.show', compact('user'));
     }
 
@@ -24,13 +24,24 @@ class ProfileController extends Controller
     }
 
     public function update(Request $request, $id) {
-        // $request->validate([
-        //
-        // ]);
+        $request->validate([
+            'avatar'    =>  'image|mimes:jpeg,jpg,png,gif|max:2048'
+        ]);
+
         $profile = \App\Profile::where('user_id', $id)->first();
 
-        foreach($request->except(['_method', '_token']) as $k=>$v) {
+        foreach($request->except(['_method', '_token', 'avatar']) as $k=>$v) {
             $profile->$k = $v;
+        }
+
+        // avatar upload
+        if($request->file('avatar')) {
+            $image = $request->file('avatar');
+            $new_name = uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path("images/avatars/" . $id), $new_name);
+            $profile->avatar = $new_name;
+        } else {
+            $profile->avatar = null;
         }
 
         if($profile->save()) {

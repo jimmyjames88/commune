@@ -33,7 +33,10 @@ class LikeController extends Controller
                 'likeable_type' =>  $type,
                 'user_id'       =>  Auth::id()
             ]);
+
         }
-        return back();
+        return response()->json([
+            'status'    =>  'success',
+        ]);
     }
 }

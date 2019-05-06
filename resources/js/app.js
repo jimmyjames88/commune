@@ -7,6 +7,8 @@
 
 require('./bootstrap');
 
+require('lightbox2/dist/js/lightbox.js');
+
 window.Vue = require('vue');
 
 /**
@@ -20,14 +22,30 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+Vue.component('like-button', require('./components/LikeButton.vue').default);
+Vue.component('photo-upload', require('./components/PhotoUpload.vue').default);
 
 const app = new Vue({
     el: '#app'
+});
+
+
+
+$(function(){
+
+    $('.bootstrap-tabs .nav-link').on('click', function(e){
+        var target = $(this).attr('href');
+        $(this).parent('li').siblings('li').children('a').removeClass('active');
+        $(this).addClass('active');
+
+        $(target).siblings('.card-body').addClass('collapse');
+        $(target).removeClass('collapse');
+    });
+
 });

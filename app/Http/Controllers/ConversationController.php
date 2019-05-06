@@ -23,9 +23,20 @@ class ConversationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $conversation = \App\Conversation::create([
+
+        ]);
+        if($conversation){
+            $conversation->users()->attach(Auth::id());
+            $conversation->users()->attach($id);
+
+            return redirect('/conversations/' . $conversation->id);
+        }
+
+        return back();
+
     }
 
     /**

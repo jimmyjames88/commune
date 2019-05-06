@@ -11,7 +11,6 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -42,7 +41,8 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/conversations">
                                 Messages
-                                @if(Auth::user()->conversations[0]->allUnreadMessages())
+
+                                @if(is_array(Auth::user()->conversations) && Auth::user()->conversations[0]->allUnreadMessages())
                                 <span class="badge badge-danger">{{ Auth::user()->conversations[0]->allUnreadMessages() }}</span>
                                 @endif
                             </a>
@@ -94,7 +94,7 @@
             <div class="row">
                 @auth
                 @hasSection('sidebar-left')
-                <div class="col-md-3">
+                <div class="col-md-4 sidebar-left">
                     @yield('sidebar-left')
                 </div>
                 @endif
@@ -114,15 +114,7 @@
 
                     @yield('content')
                 </div>
-                @auth
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-body">
-                            Something
-                        </div>
-                    </div>
-                </div>
-                @endauth
+
             </div>
         </main>
     </div>
