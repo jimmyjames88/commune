@@ -106,7 +106,7 @@
                         {{ request()->session()->get('error') }}
                     </p>
                     @endif
-                    @if(request()->session()->has('message'))
+                    @if (request()->session()->has('message'))
                     <p class="alert alert-success">
                         {{ request()->session()->get('message') }}
                     </p>
