@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -24,6 +25,7 @@ class ProfileController extends Controller
     }
 
     public function update(Request $request, $id) {
+
         $request->validate([
             'avatar'    =>  'image|mimes:jpeg,jpg,png,gif|max:2048'
         ]);
@@ -36,9 +38,18 @@ class ProfileController extends Controller
 
         // avatar upload
         if($request->file('avatar')) {
+            // assign for easy access
             $image = $request->file('avatar');
+
+            // generate unique id + file extension
             $new_name = uniqid() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path("images/avatars/" . $id), $new_name);
+
+            // store image in public folder
+            // $image->move(public_path("images/avatars/" . $id), $new_name);
+
+            Storage::disk('s3')->put("/avatars/" . $id . '/' . $new_name, file_get_contents($image), 'public');
+
+            // save image path to profile object
             $profile->avatar = $new_name;
         } else {
             $profile->avatar = null;
