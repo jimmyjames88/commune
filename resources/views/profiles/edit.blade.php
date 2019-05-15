@@ -23,16 +23,14 @@
     </div>
     <div class="form-group">
         <label>Profile Photo</label>
-        <!-- <photo-upload
+        <photo-upload
             :name="'avatar'"
             photo="{{ $profile->avatar ? '/images/avatars/' . $profile->user->id . '/' . $profile->avatar : ''}}">
-        </photo-upload> -->
+        </photo-upload>
 
-        @if($profile->avatar)
-        <img src="{{ Storage::disk('s3')->url('/avatars/' . $profile->user_id . '/' . $profile->avatar) }}" />     
-        @endif
-
-        <input type="file" name="avatar" />
+        <!-- @if($profile->avatar)
+        <img src="{{ Storage::disk('s3')->url('/avatars/' . $profile->user_id . '/' . $profile->avatar) }}" />
+        @endif -->
 
     </div>
     <div class="form-group">

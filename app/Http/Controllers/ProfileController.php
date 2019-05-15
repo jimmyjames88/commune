@@ -45,7 +45,7 @@ class ProfileController extends Controller
             $new_name = uniqid() . '.' . $image->getClientOriginalExtension();
 
             // store image in public folder
-            // $image->move(public_path("images/avatars/" . $id), $new_name);
+            
 
             Storage::disk('s3')->put("/avatars/" . $id . '/' . $new_name, file_get_contents($image), 'public');
 
