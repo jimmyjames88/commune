@@ -4,7 +4,7 @@
 <div class="card">
     <div class="card-body text-center">
         @if($user->profile->avatar)
-        <div class="img-thumbnail rounded profile-photo" style="background-image:url('/images/avatars/{{ $user->id }}/{{ $user->profile->avatar }}')"></div>
+        <div class="img-thumbnail rounded profile-photo" style="background-image:url('{{ Storage::disk('s3')->url('/avatars/' . $user->profile->user_id . '/' . $user->profile->avatar) }}')"></div>
         @else
         <div class="img-thumbnail rounded profile-photo" style="background-image:url('/images/avatars/default.png')"></div>
         @endif

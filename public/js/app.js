@@ -1808,91 +1808,9 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PhotoUpload.vue?vue&type=script&lang=js& ***!
   \**********************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['name', 'photo'],
-  data: function data() {
-    return {
-      showPreview: false
-    };
-  },
-  mounted: function mounted() {
-    if (this.photo) {
-      this.setPreview(this.photo);
-    }
-  },
-  methods: {
-    removePhoto: function removePhoto() {
-      this.$refs.file.value = '';
-      this.showPreview = false;
-    },
-    fileChange: function fileChange(e) {
-      var file = e.target.files[0];
-      this.setPreview(file);
-    },
-    setPreview: function setPreview(file) {
-      // set initial preview from photo prop
-      if (typeof file == 'string') {
-        this.$refs.preview.style.backgroundImage = 'url(' + this.photo + ')';
-        this.showPreview = true;
-        return;
-      } // set preview for chosen file
-
-
-      var reader = new FileReader();
-      var self = this;
-
-      reader.onload = function (e) {
-        self.$refs.preview.style.backgroundImage = 'url(' + e.target.result + ')';
-        self.showPreview = true;
-      };
-
-      reader.readAsDataURL(file);
-    }
-  }
-});
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\Git-Colabs\\commune\\resources\\js\\components\\PhotoUpload.vue: Unexpected token, expected \";\" (88:39)\n\n  86 |         saveAvatar() {\n  87 |             var photo = this.photo;\n> 88 |             var uploadedPhoto = Storage::disk('s3')->url('/avatars/' . $profile->user_id . '/' . $profile->avatar);\n     |                                        ^\n  89 |             if(photo == null) {\n  90 |                 alert('1');\n  91 |             } else {\n    at Parser.raise (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:3831:17)\n    at Parser.unexpected (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:5143:16)\n    at Parser.semicolon (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:5131:40)\n    at Parser.parseVarStatement (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:7715:10)\n    at Parser.parseStatementContent (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:7310:21)\n    at Parser.parseStatement (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:7243:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:7810:25)\n    at Parser.parseBlockBody (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:7797:10)\n    at Parser.parseBlock (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:7786:10)\n    at Parser.parseFunctionBody (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:6876:24)\n    at Parser.parseFunctionBodyAndFinish (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:6860:10)\n    at Parser.parseMethod (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:6804:10)\n    at Parser.parseObjectMethod (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:6713:19)\n    at Parser.parseObjPropValue (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:6755:23)\n    at Parser.parseObj (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:6670:12)\n    at Parser.parseExprAtom (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:6229:21)\n    at Parser.parseExprSubscripts (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:5862:23)\n    at Parser.parseMaybeUnary (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:5842:21)\n    at Parser.parseExprOps (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:5729:23)\n    at Parser.parseMaybeConditional (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:5702:23)\n    at Parser.parseMaybeAssign (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:5647:21)\n    at Parser.parseObjectProperty (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:6730:101)\n    at Parser.parseObjPropValue (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:6755:101)\n    at Parser.parseObj (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:6670:12)\n    at Parser.parseExprAtom (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:6229:21)\n    at Parser.parseExprSubscripts (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:5862:23)\n    at Parser.parseMaybeUnary (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:5842:21)\n    at Parser.parseExprOps (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:5729:23)\n    at Parser.parseMaybeConditional (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:5702:23)\n    at Parser.parseMaybeAssign (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:5647:21)\n    at Parser.parseExportDefaultExpression (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:8405:24)\n    at Parser.parseExport (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:8299:31)\n    at Parser.parseStatementContent (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:7347:27)\n    at Parser.parseStatement (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:7243:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:7810:25)\n    at Parser.parseBlockBody (C:\\Git-Colabs\\commune\\node_modules\\@babel\\parser\\lib\\index.js:7797:10)");
 
 /***/ }),
 
@@ -38187,7 +38105,17 @@ var render = function() {
         staticClass: "form-control",
         attrs: { name: _vm.name, type: "file", accept: "image/*" },
         on: { change: _vm.fileChange }
-      })
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "submit" },
+          on: { click: _vm.saveAvatar }
+        },
+        [_vm._v("Test")]
+      )
     ])
   ])
 }
@@ -50480,14 +50408,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!*************************************************!*\
   !*** ./resources/js/components/PhotoUpload.vue ***!
   \*************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _PhotoUpload_vue_vue_type_template_id_48feb790___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PhotoUpload.vue?vue&type=template&id=48feb790& */ "./resources/js/components/PhotoUpload.vue?vue&type=template&id=48feb790&");
 /* harmony import */ var _PhotoUpload_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PhotoUpload.vue?vue&type=script&lang=js& */ "./resources/js/components/PhotoUpload.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _PhotoUpload_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PhotoUpload.vue?vue&type=style&index=0&lang=scss& */ "./resources/js/components/PhotoUpload.vue?vue&type=style&index=0&lang=scss&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _PhotoUpload_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _PhotoUpload_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _PhotoUpload_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PhotoUpload.vue?vue&type=style&index=0&lang=scss& */ "./resources/js/components/PhotoUpload.vue?vue&type=style&index=0&lang=scss&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -50519,7 +50448,7 @@ component.options.__file = "resources/js/components/PhotoUpload.vue"
 /*!**************************************************************************!*\
   !*** ./resources/js/components/PhotoUpload.vue?vue&type=script&lang=js& ***!
   \**************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -50592,9 +50521,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Projects\socialmedia\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\Projects\socialmedia\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\Projects\socialmedia\resources\sass\marketing.scss */"./resources/sass/marketing.scss");
+__webpack_require__(/*! C:\Git-Colabs\commune\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Git-Colabs\commune\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\Git-Colabs\commune\resources\sass\marketing.scss */"./resources/sass/marketing.scss");
 
 
 /***/ })

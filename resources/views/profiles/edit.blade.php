@@ -2,6 +2,7 @@
 
 @section('content')
 <h1 class="title">Edit Profile</h1>
+
 <form action="/profiles/{{ $profile->user_id }}" method="post" enctype="multipart/form-data">
     {{ method_field('put') }}
     @csrf
@@ -25,7 +26,7 @@
         <label>Profile Photo</label>
         <photo-upload
             :name="'avatar'"
-            photo="{{ $profile->avatar ? '/images/avatars/' . $profile->user->id . '/' . $profile->avatar : ''}}">
+            photo="{{ Storage::disk('s3')->url('/avatars/' . $profile->user_id . '/' . $profile->avatar) }}">
         </photo-upload>
 
         <!-- @if($profile->avatar)

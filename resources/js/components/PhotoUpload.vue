@@ -7,6 +7,7 @@
                     </div>
             </div>
             <input :name="name" type="file" accept="image/*" ref="file" class="form-control" @change="fileChange" />
+            <button type="submit" class="btn btn-danger" @click="saveAvatar">Test</button>
         </div>
     </div>
 </template>
@@ -43,6 +44,7 @@
         data() {
             return {
                 showPreview: false
+
             }
         },
         mounted() {
@@ -54,11 +56,14 @@
             removePhoto() {
                 this.$refs.file.value = '';
                 this.showPreview = false;
+
             },
             fileChange(e) {
                 var file = e.target.files[0];
                 this.setPreview(file);
+
             },
+
             setPreview(file) {
 
                 // set initial preview from photo prop
@@ -76,6 +81,17 @@
                     self.showPreview = true;
                 }
                 reader.readAsDataURL(file);
+            },
+
+            saveAvatar() {
+                var photo = this.photo;
+                var uploadedPhoto = Storage::disk('s3')->url('/avatars/' . $profile->user_id . '/' . $profile->avatar);
+                if(photo == null) {
+                    alert('1');
+                } else {
+                    console.log(uploadedPhoto);
+                    saveFile(uploadedPhoto);
+                }
             }
         }
     }
