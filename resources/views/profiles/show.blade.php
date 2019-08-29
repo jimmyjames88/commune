@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('sidebar-left')
+
 <div class="card">
     <div class="card-body text-center">
         @if($user->profile->avatar)

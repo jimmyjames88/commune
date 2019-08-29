@@ -30,6 +30,7 @@ window.Vue = require('vue');
  */
 Vue.component('like-button', require('./components/LikeButton.vue').default);
 Vue.component('photo-upload', require('./components/PhotoUpload.vue').default);
+Vue.component('comment', require('./components/Comment.vue').default);
 
 const app = new Vue({
     el: '#app'

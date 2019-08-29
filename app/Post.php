@@ -27,6 +27,7 @@ class Post extends Model
     // set a property to see if the post is liked by a user
     public function getLikedByUserAttribute()
     {
+    
         $id = Auth::id();
         $like = $this->likes->first(function ($row) use ($id) {
             return $row->user_id === $id;

@@ -7,7 +7,7 @@ use Auth;
 
 class Comment extends Model
 {
-    protected $fillable = ['body', 'user_id', 'post_id', 'photo'];
+    protected $fillable = ['body', 'user_id', 'post_id', 'gif'];
     protected $appends = ['liked_by_user', 'belongs_to_user'];
 
     public function user() {

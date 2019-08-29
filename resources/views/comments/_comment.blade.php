@@ -7,10 +7,10 @@
     </h5>
     <em>{{ $comment->created_at->diffForHumans() }}</em>
     <p>{{ $comment->body }}</p>
-    @if($comment->photo)
+    @if($comment->gif)
     <div class="card">
         <div class="card-body">
-            <img class="img-fluid" src="/images/posts/{{ $post->id }}/comments/{{ $comment->photo }}" />
+            <img class="img-fluid" src="{{ $comment->gif }}" />
         </div>
     </div>
     @endif
