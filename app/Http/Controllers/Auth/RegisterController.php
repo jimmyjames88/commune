@@ -71,8 +71,8 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        if($user)
-            SendWelcomeEmail::dispatch($user)->onQueue('email');
+        // if($user)
+        //     SendWelcomeEmail::dispatch($user)->onQueue('email');
 
         return $user;
 
