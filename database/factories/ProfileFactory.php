@@ -9,7 +9,7 @@ $factory->define(App\Profile::class, function (Faker $faker) {
         'location'  =>  'Calgary, AB',
         'birthday'  =>  $faker->dateTime(),
         'bio'       =>  $faker->realText(mt_rand(10, 40)),
-        'avatar'    =>  $faker->text(mt_rand(5, 12)) . '.png',
+        'avatar'    =>  $faker->imageUrl(96, 96, 'people'),
         'website'   =>  $faker->url()
     ];
 });

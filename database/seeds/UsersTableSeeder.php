@@ -26,12 +26,12 @@ class UsersTableSeeder extends Seeder
                         //                 ->make(['user_id' => $user->id ])
                         //         );
                         //     });
+                        echo '...' . $userCount;
                         factory(App\Profile::class)
                             ->create([ 'user_id' => $user->id ]);
                         factory(App\Post::class, 5)
                             ->create(['user_id'   =>  $user->id])
                             ->each(function($post) use ($user, $userCount){
-                                echo '...';
                                 factory(App\Comment::class, 5)
                                     ->create([
                                         'user_id' => $user->id,

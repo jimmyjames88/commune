@@ -11,8 +11,6 @@
   background-size: cover;
 }
 
-#photo-gallery .jumbotron p,
-#photo-gallery .jumbotron h2 {
+#photo-gallery .jumbotron p, #photo-gallery .jumbotron h2 {
   color: #fff;
 }
-
