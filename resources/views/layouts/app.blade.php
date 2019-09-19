@@ -13,11 +13,11 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
 </head>
 <body>
     <div id="app">
-        
+
         <nav class="navbar fixed-top navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="/">
