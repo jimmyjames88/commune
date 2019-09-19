@@ -14,3 +14,7 @@
 #photo-gallery .jumbotron p, #photo-gallery .jumbotron h2 {
   color: #fff;
 }
+
+#secOne .container {
+  background-color: yellow;
+}
