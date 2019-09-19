@@ -50931,9 +50931,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Projects\socialmedia\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\Projects\socialmedia\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\Projects\socialmedia\resources\sass\marketing.scss */"./resources/sass/marketing.scss");
+__webpack_require__(/*! /Users/macbook/Desktop/commune/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /Users/macbook/Desktop/commune/resources/sass/app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! /Users/macbook/Desktop/commune/resources/sass/marketing.scss */"./resources/sass/marketing.scss");
 
 
 /***/ })
