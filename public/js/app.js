@@ -1835,34 +1835,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['id', 'liked', 'type', 'count'],
+  props: ['count', 'postId', 'isLiked'],
   data: function data() {
     return {
-      isLiked: false,
-      likeCount: 0
+      dataCount: 0,
+      dataIsLiked: false
     };
   },
+  mounted: function mounted() {
+    this.dataCount = this.count;
+    this.dataIsLiked = this.isLiked;
+  },
   methods: {
-    doLike: function doLike() {
+    doLike: function doLike(e) {
       var _this = this;
 
-      axios.get('/likes/' + this.id + '/' + this.type).then(function (response) {
-        if (response.data.status == 'success') {
-          // update isLiked
-          _this.isLiked = !_this.isLiked; // update the likeCount
+      e.preventDefault();
 
-          if (_this.isLiked) {
-            _this.likeCount++;
+      if (this.dataIsLiked) {
+        var url = '/posts/' + this.postId + '/unlike';
+      } else {
+        var url = '/posts/' + this.postId + '/like';
+      } // ajax request to the unlike route
+
+
+      axios.post(url).then(function (response) {
+        if (response.data.status == 'success') {
+          if (_this.dataIsLiked) {
+            // did unlike
+            _this.dataCount--;
+            _this.dataIsLiked = false;
           } else {
-            _this.likeCount--;
+            // did like
+            _this.dataCount++;
+            _this.dataIsLiked = true;
           }
+        } else {// if fails
         }
       });
     }
-  },
-  mounted: function mounted() {
-    this.isLiked = this.liked;
-    this.likeCount = this.count;
   }
 });
 
@@ -38285,29 +38296,16 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "a",
-    {
-      class: { "font-weight-bold": _vm.isLiked },
-      attrs: { href: "#" },
-      on: {
-        click: function($event) {
-          $event.preventDefault()
-          return _vm.doLike($event)
-        }
-      }
-    },
-    [
-      _c("i", { staticClass: "fa fa-thumbs-up" }),
-      _vm._v(
-        " " +
-          _vm._s(_vm.isLiked ? "Unlike" : "Like") +
-          " (" +
-          _vm._s(_vm.likeCount) +
-          ")\n"
-      )
-    ]
-  )
+  return _c("a", { attrs: { href: "#" }, on: { click: _vm.doLike } }, [
+    _c("i", { staticClass: "fa fa-thumbs-up" }),
+    _vm._v(
+      " " +
+        _vm._s(_vm.dataIsLiked ? "Unlike" : "Like") +
+        " (" +
+        _vm._s(_vm.dataCount) +
+        ")\n"
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -50683,14 +50681,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!************************************************!*\
   !*** ./resources/js/components/LikeButton.vue ***!
   \************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LikeButton_vue_vue_type_template_id_2a9c25d4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LikeButton.vue?vue&type=template&id=2a9c25d4& */ "./resources/js/components/LikeButton.vue?vue&type=template&id=2a9c25d4&");
 /* harmony import */ var _LikeButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LikeButton.vue?vue&type=script&lang=js& */ "./resources/js/components/LikeButton.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _LikeButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _LikeButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -50720,7 +50719,7 @@ component.options.__file = "resources/js/components/LikeButton.vue"
 /*!*************************************************************************!*\
   !*** ./resources/js/components/LikeButton.vue?vue&type=script&lang=js& ***!
   \*************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

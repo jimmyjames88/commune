@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return redirect('/home');
+    return view('marketing.index');
 });
 
 Auth::routes();
@@ -45,7 +45,9 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/posts/create', 'PostController@create');
     Route::get('/posts/{post}/edit', 'PostController@edit');
     Route::post('/posts', 'PostController@store');
-    Route::get('/likes/{like_id}/{like_type}', 'LikeController@handleLike');
+    // Route::get('/likes/{like_id}/{like_type}', 'LikeController@handleLike');
+    Route::post('/posts/{post}/like', 'PostController@like');
+    Route::post('/posts/{post}/unlike', 'PostController@unlike');
     Route::get('/posts/{post}', 'PostController@show');
     Route::put('/posts/{post}', 'PostController@update');
 

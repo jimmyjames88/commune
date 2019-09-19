@@ -21,13 +21,13 @@ class Post extends Model
 
     public function likes()
     {
-        return $this->morphMany('App\Like', 'likeable');
+        return $this->hasMany('App\Like');
     }
 
     // set a property to see if the post is liked by a user
     public function getLikedByUserAttribute()
     {
-    
+
         $id = Auth::id();
         $like = $this->likes->first(function ($row) use ($id) {
             return $row->user_id === $id;

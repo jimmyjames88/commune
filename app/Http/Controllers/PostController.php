@@ -129,7 +129,7 @@ class PostController extends Controller
         $post->body = $request->input('body');
 
         print_r($request->photo);
-        
+
         if($request->photo){
             // photo prep for upload
             $image = $request->file('photo');
@@ -174,6 +174,39 @@ class PostController extends Controller
         } else {
             dd('Unspecified error');
         }
+    }
+
+    public function like($id)
+    {
+
+        $like = new \App\Like;
+        $like->user_id = Auth::id();
+        $like->post_id = $id;
+
+        if($like->save()) {
+            return json_encode([
+                'status' => 'success'
+            ]);
+        }
+
+        return json_encode([
+            'status' => 'failed'
+        ]);
+
+    }
+
+
+    public function unlike($id)
+    {
+        $like = \App\Like::where('post_id', $id)
+                            ->where('user_id', Auth::id())
+                            ->first();
+
+        if($like->delete()) {
+            return json_encode([ 'status' => 'success' ]);
+        }
+
+        return json_encode([ 'status' => 'failed' ]);
     }
 
 }

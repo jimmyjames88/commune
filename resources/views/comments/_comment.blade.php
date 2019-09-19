@@ -15,12 +15,7 @@
     </div>
     @endif
     <div class="comment-buttons">
-        <like-button
-                :id="{{ $comment->id }}"
-                :type="'comment'"
-                :count="{{ $comment->likes()->count() }}"
-                :liked="{{ $comment->liked_by_user ? 1 : 0 }}">
-        </like-button>
+        
         @if($comment->belongs_to_user)
         <a href="/posts/{{ $post->id }}/comments/{{ $comment->id }}/edit">Edit</a>
         <a href="/posts/{{ $post->id }}/comments/{{ $comment->id }}/delete">Delete</a>

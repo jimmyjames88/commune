@@ -26,12 +26,7 @@
         @endif
         <hr />
         <div class="card-text post-buttons">
-            <like-button
-                :id="{{ $post->id }}"
-                :liked="{{ ($post->liked_by_user ? 1 : 0) }}"
-                :type="'post'"
-                :count="{{ $post->likes()->count() }}"
-            ></like-button>
+            <like-button :post-id="{{ $post->id }}" is-liked="{{ $post->likedByUser }}" :count="{{ $post->likes()->count() }}"></like-button>
             <a href="/posts/{{ $post->id }}#comments">
                 <i class="fa fa-comment-o"></i> Comments ({{ $post->comments->count() }})
             </a>

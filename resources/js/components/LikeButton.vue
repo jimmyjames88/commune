@@ -1,43 +1,61 @@
 <template>
-    <a href="#" @click.prevent="doLike" :class="{ 'font-weight-bold' : isLiked }">
-        <i class="fa fa-thumbs-up"></i> {{ ( isLiked ? 'Unlike' : 'Like') }} ({{ likeCount }})
+    <a href="#" @click="doLike">
+        <i class="fa fa-thumbs-up"></i> {{ dataIsLiked ? 'Unlike' : 'Like' }} ({{ dataCount }})
     </a>
 </template>
 
 <script>
-export default {
-    props: ['id', 'liked', 'type', 'count'],
-    data() {
-        return {
-            isLiked: false,
-            likeCount: 0
-        }
-    },
-    methods: {
-        doLike() {
+    export default {
+        props: [ 'count', 'postId', 'isLiked' ],
 
-            axios.get('/likes/' + this.id + '/' + this.type)
-                .then((response) => {
-                    if(response.data.status == 'success') {
-                        // update isLiked
-                        this.isLiked = !this.isLiked;
+        data() {
+            return {
+                dataCount: 0,
+                dataIsLiked: false,
+            }
+        },
 
-                        // update the likeCount
-                        if(this.isLiked) {
-                            this.likeCount++;
+        mounted() {
+            this.dataCount = this.count;
+            this.dataIsLiked = this.isLiked;
+        },
+
+        methods: {
+            doLike(e) {
+
+                e.preventDefault();
+
+                if(this.dataIsLiked) {
+                    var url = '/posts/' + this.postId + '/unlike';
+                } else {
+                    var url = '/posts/' + this.postId + '/like';
+                }
+
+                // ajax request to the unlike route
+                axios.post(url)
+                    .then( (response) => {
+
+                        if(response.data.status == 'success') {
+
+                            if(this.dataIsLiked) {
+                                // did unlike
+                                this.dataCount--;
+                                this.dataIsLiked = false;
+                            } else {
+                                // did like
+                                this.dataCount++;
+                                this.dataIsLiked = true;
+                            }
+
                         } else {
-                            this.likeCount--;
+                            // if fails
                         }
 
-                    }
-                })
+                    })
+
+            }
         }
-    },
-    mounted() {
-        this.isLiked = this.liked;
-        this.likeCount = this.count;
     }
-}
 </script>
 
 <style>

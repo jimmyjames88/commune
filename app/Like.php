@@ -7,15 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Like extends Model
 {
 
-    protected $fillable = ['user_id', 'likeable_id', 'likeable_type'];
+    protected $fillable = ['user_id', 'post_id'];
 
     public function user()
     {
         return $this->belongsTo('App\User');
     }
 
-    public function likeable()
+    public function post()
     {
-        return $this->morphTo();
+        return $this->belongsTo('App\Post');
     }
 }
